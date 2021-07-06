@@ -24,7 +24,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--            app:imageUrl="@{viewModel.selectedComic.thumbnail.path}"-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,7 +77,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="@string/search_error" />
-                        <!--                        android:text="@{viewModel.selectedComic.title}"-->
 
                         <TextView
                             android:id="@+id/comicAuthors"
@@ -89,7 +87,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/comicTitle"
                             tools:text="@string/search_error" />
-                        <!--                        android:text="@{viewModel.getAuthors()}"-->
 
                         <TextView
                             android:id="@+id/comicDescription"
@@ -99,7 +96,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/comicAuthors"
                             tools:text="@string/search_error" />
-                        <!--                        android:text="@{viewModel.selectedComic.description}"-->
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </ScrollView>

@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mySearchViewConstrain"
+            android:id="@+id/svConstraint"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_margin="8dp"
@@ -22,7 +22,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/mySearchView"
+                android:id="@+id/svComicSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -55,7 +55,7 @@
             android:layout_marginTop="48dp"
             android:layout_marginBottom="16dp"
             android:background="@color/white_two"
-            app:layout_constraintTop_toBottomOf="@+id/mySearchViewConstrain"
+            app:layout_constraintTop_toBottomOf="@+id/svConstraint"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,8 +75,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-<!--        app:marvelApiStatus="@{viewModel.status}"-->
-<!--        will try use it later for display received data-->
 
         <TextView
             android:id="@+id/search_info"

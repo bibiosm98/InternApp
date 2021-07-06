@@ -7,9 +7,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //comment
-
-        //comment nr. 2, just for remember
     }
 }

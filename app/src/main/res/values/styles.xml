@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="ActionBar" parent="@style/Theme.AppCompat.Light">
         <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
         <item name="actionMenuTextColor">@color/colorPrimary</item>

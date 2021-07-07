@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.internapp.MainViewModel
-import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
-import com.example.internapp.databinding.HomeFragmentBindingImpl
 
 class HomeFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -20,15 +18,12 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HomeFragmentBinding.inflate(inflater,container, false)
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-//        viewModel.getMarvelAppComics()
     }
-
 }

@@ -13,16 +13,19 @@ import com.example.internapp.databinding.ComicItemBinding
 import com.example.internapp.repository.Comic
 import com.google.android.material.snackbar.Snackbar
 
-class ComicAdapter(fragment: HomeFragment, viewModel: MainViewModel): RecyclerView.Adapter<ComicViewHolder>(){
-    private var comicList : List<Comic> = listOf()
-    init{
+class ComicAdapter(fragment: HomeFragment, viewModel: MainViewModel) :
+    RecyclerView.Adapter<ComicViewHolder>() {
+    private var comicList: List<Comic> = listOf()
+
+    init {
         viewModel.comicList.observe(fragment.viewLifecycleOwner, Observer { list ->
-            list?.let{
+            list?.let {
                 comicList = it
                 notifyDataSetChanged()
             }
         })
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
         val binding = ComicItemBinding.inflate(LayoutInflater.from(parent.context))
         return ComicViewHolder(binding)
@@ -30,7 +33,7 @@ class ComicAdapter(fragment: HomeFragment, viewModel: MainViewModel): RecyclerVi
 
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             Snackbar.make(holder.itemView, comicList[position].title, Snackbar.LENGTH_SHORT).show()
         }
         holder.bind(comicList[position])
@@ -41,13 +44,14 @@ class ComicAdapter(fragment: HomeFragment, viewModel: MainViewModel): RecyclerVi
     }
 }
 
-class ComicViewHolder(private val binding: ComicItemBinding):RecyclerView.ViewHolder(binding.root){
-    fun bind (comic: Comic){
+class ComicViewHolder(private val binding: ComicItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(comic: Comic) {
         var authorsList = ""
         val items = comic.creators.items
-        if(items.isNotEmpty()){
+        if (items.isNotEmpty()) {
             authorsList = "written by "
-            items.forEach{ auth ->
+            items.forEach { auth ->
                 authorsList += auth.name + ", "
             }
         }
@@ -55,7 +59,8 @@ class ComicViewHolder(private val binding: ComicItemBinding):RecyclerView.ViewHo
         binding.comicAuthors.text = authorsList
         binding.comicDescription.text = comic.description
 
-        val imgUri = comic.thumbnail.path.toUri().buildUpon().scheme("https").appendPath("/portrait_uncanny.jpg").build()
+        val imgUri = comic.thumbnail.path.toUri().buildUpon().scheme("https")
+            .appendPath("/portrait_uncanny.jpg").build()
         Glide.with(binding.root)
             .load(imgUri)
             .apply(RequestOptions().transform(RoundedCorners(16)))

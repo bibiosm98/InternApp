@@ -1,4 +1,4 @@
-package com.example.internapp.network
+package com.example.internapp.repository
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

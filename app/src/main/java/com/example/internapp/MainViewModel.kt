@@ -13,12 +13,15 @@ class MainViewModel : ViewModel() {
     val comicList: LiveData<List<Comic>?>
         get() = _comicList
 
+    private val _selectedComic = MutableLiveData<Comic>()
+    val selectedComic: LiveData<Comic>
+        get() = _selectedComic
 
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>
         get() = _uiState
 
-    val exceptionHandler = CoroutineExceptionHandler { _, _ ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         _uiState.value = UIState.OnError
     }
 
@@ -32,5 +35,22 @@ class MainViewModel : ViewModel() {
             _comicList.value = MarvelApiRepository().getData()
             _uiState.value = UIState.OnSuccess
         }
+    }
+
+    fun selectComic(position: Int) {
+        _selectedComic.value = _comicList.value?.get(position)
+    }
+
+    fun getAuthors(): String {
+        var authorsList = ""
+        val items = _selectedComic.value?.creators?.items
+        items?.let{
+            authorsList = "written by "
+            items.forEach { auth ->
+                authorsList += auth.name + ", "
+            }
+            authorsList = authorsList.substring(0, authorsList.length - 2);
+        }
+        return authorsList
     }
 }

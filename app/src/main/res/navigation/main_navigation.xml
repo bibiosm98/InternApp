@@ -9,5 +9,18 @@
         android:id="@+id/homeFragment"
         android:name="com.example.internapp.ui.HomeFragment"
         android:label="HomeFragment"
-        toold:layout="@layout/home_fragment"/>
+        toold:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.internapp.ui.DetailFragment"
+        android:label="DetailFragment"
+        toold:layout="@layout/detail_fragment">
+        <argument
+            android:name="comicPosition"
+            app:argType="integer" />
+    </fragment>
 </navigation>

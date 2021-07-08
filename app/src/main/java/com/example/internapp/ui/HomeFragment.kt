@@ -1,6 +1,7 @@
 package com.example.internapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.internapp.MainViewModel
+import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
+import com.example.internapp.repository.UIState
 
 class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
@@ -25,6 +28,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         adapter = ComicAdapter(this, viewModel)
         binding.comicRecyclerView.adapter = adapter
+        refreshHome()
 
         return binding.root
     }
@@ -34,9 +38,29 @@ class HomeFragment : Fragment() {
         initStateObserver()
     }
 
-    fun initStateObserver() {
+    private fun initStateObserver() {
         viewModel.uiState.observe(viewLifecycleOwner, Observer {
-            //when()  //how to serve this? change placeholders? repeat request?
+            when (viewModel.uiState.value) {
+                UIState.InProgress -> {
+                    Log.i("STATE", "InProgress")
+                    binding.imgState.visibility = View.GONE
+                    binding.searchProgressbar.visibility = View.VISIBLE
+                }
+                UIState.OnError -> {
+                    Log.i("STATE", "OnError")
+                    binding.imgState.visibility = View.VISIBLE
+                    binding.searchProgressbar.visibility = View.GONE
+                    binding.imgState.setImageResource(R.drawable.ic_baseline_cloud_off_24)
+                }
+                UIState.OnSuccess -> {
+                    Log.i("STATE", "Success")
+                    binding.imgState.visibility = View.GONE
+                    binding.searchProgressbar.visibility = View.GONE
+                }
+                else -> {
+
+                }
+            }
         })
     }
 
@@ -45,4 +69,10 @@ class HomeFragment : Fragment() {
             .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(position))
     }
 
+    private fun refreshHome() {
+        binding.refreshHome.setOnRefreshListener {
+            viewModel.getMarvelAppComics()
+            binding.refreshHome.isRefreshing = false
+        }
+    }
 }

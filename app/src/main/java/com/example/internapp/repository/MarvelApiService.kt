@@ -1,4 +1,4 @@
-package com.example.internapp.network
+package com.example.internapp.repository
 
 import retrofit2.Response
 import retrofit2.http.GET

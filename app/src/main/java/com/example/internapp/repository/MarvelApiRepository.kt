@@ -1,9 +1,10 @@
-package com.example.internapp.network
+package com.example.internapp.repository
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -30,14 +31,17 @@ class MarvelApiRepository {
     private val service = retrofit.create(MarvelApiService::class.java)
 
     suspend fun getData(): List<Comic>? {
-        val comicProperty = service.getComics(
+        val response = service.getComics(
             "1",
             "080a502746c8a60aeab043387a56eef0",
             "6edc18ab1a954d230c1f03c590d469d2",
             null,
             null
         )
-        if (comicProperty.isSuccessful) return comicProperty.body()?.data?.results
-        return null
+        if (response.isSuccessful) {
+            return response.body()?.data?.results
+        } else {
+            throw HttpException(response)
+        }
     }
 }

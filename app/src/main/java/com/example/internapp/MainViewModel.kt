@@ -44,7 +44,7 @@ class MainViewModel : ViewModel() {
     fun getAuthors(): String {
         var authorsList = ""
         val items = _selectedComic.value?.creators?.items
-        if (!items?.isEmpty()!!) {
+        items?.let{
             authorsList = "written by "
             items.forEach { auth ->
                 authorsList += auth.name + ", "

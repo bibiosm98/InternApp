@@ -33,14 +33,13 @@
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:behavior_peekHeight="100dp"
             android:background="@drawable/bottom_sheet"
+            app:behavior_peekHeight="100dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="?attr/actionBarSize"
                 android:padding="8dp">
 
                 <ImageView
@@ -68,8 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="?attr/actionBarSize"
-                        android:padding="16dp"
-                        android:paddingBottom="?attr/actionBarSize">
+                        android:padding="16dp">
 
                         <TextView
                             android:id="@+id/tvComicTitle"

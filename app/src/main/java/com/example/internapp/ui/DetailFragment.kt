@@ -38,7 +38,6 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         BottomSheetBehavior.from(binding.bottomSheet).apply {
-//            peekHeight = 400
             this.state = BottomSheetBehavior.STATE_DRAGGING
         }
 

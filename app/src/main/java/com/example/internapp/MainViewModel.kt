@@ -49,7 +49,7 @@ class MainViewModel : ViewModel() {
     fun getAuthors(): String {
         var authorsList = ""
         val items = _selectedComic.value?.creators?.items
-        items?.let{
+        items?.let {
             authorsList = "written by "
             items.forEach { auth ->
                 authorsList += auth.name + ", "
@@ -57,5 +57,9 @@ class MainViewModel : ViewModel() {
             authorsList = authorsList.substring(0, authorsList.length - 2);
         }
         return authorsList
+    }
+
+    fun getDescriptions(): String {
+        return selectedComic.value?.description + "\n\n\n" + selectedComic.value?.description + "\n\n\n"  + selectedComic.value?.description
     }
 }

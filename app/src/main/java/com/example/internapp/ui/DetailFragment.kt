@@ -11,6 +11,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.internapp.MainViewModel
 import com.example.internapp.databinding.DetailFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DetailFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
@@ -36,8 +38,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         BottomSheetBehavior.from(binding.bottomSheet).apply {
-            peekHeight = 400
-            this.state = BottomSheetBehavior.STATE_COLLAPSED
+            this.state = BottomSheetBehavior.STATE_DRAGGING
         }
 
         binding.btnFindOutMore.setOnClickListener {

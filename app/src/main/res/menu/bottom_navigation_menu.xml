@@ -10,10 +10,6 @@
         />
 
     <item
-        android:title=""
-        />
-
-    <item
         tools:override="true"
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_baseline_search_24"

@@ -42,18 +42,15 @@ class HomeFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, Observer {
             when (viewModel.uiState.value) {
                 UIState.InProgress -> {
-                    Log.i("STATE", "InProgress")
                     binding.imgState.visibility = View.GONE
                     binding.searchProgressbar.visibility = View.VISIBLE
                 }
                 UIState.OnError -> {
-                    Log.i("STATE", "OnError")
                     binding.imgState.visibility = View.VISIBLE
                     binding.searchProgressbar.visibility = View.GONE
                     binding.imgState.setImageResource(R.drawable.ic_baseline_cloud_off_24)
                 }
                 UIState.OnSuccess -> {
-                    Log.i("STATE", "Success")
                     binding.imgState.visibility = View.GONE
                     binding.searchProgressbar.visibility = View.GONE
                 }

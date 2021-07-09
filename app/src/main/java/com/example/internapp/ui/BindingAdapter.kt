@@ -6,7 +6,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
-import com.example.internapp.R
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
@@ -19,10 +18,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         Glide.with(imgView.context)
             .load(imgUri)
             .apply(requestOptions)
-            .apply(
-                RequestOptions()
-                    .placeholder(R.drawable.ic_round_home_24)
-            )
             .into(imgView)
     }
 }

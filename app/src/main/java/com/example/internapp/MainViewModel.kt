@@ -58,8 +58,4 @@ class MainViewModel : ViewModel() {
         }
         return authorsList
     }
-
-    fun getDescriptions(): String {
-        return selectedComic.value?.description + "\n\n\n" + selectedComic.value?.description + "\n\n\n"  + selectedComic.value?.description
-    }
 }

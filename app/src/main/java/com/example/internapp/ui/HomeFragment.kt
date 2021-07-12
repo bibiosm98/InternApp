@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.internapp.MainViewModel
 import com.example.internapp.R
@@ -25,7 +24,9 @@ class HomeFragment : Fragment() {
     ): View {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
-        adapter = ComicAdapter(this, viewModel)
+        adapter = ComicAdapter(this, viewModel) {
+            navigateToDetailFragment(it)
+        }
         binding.comicRecyclerView.adapter = adapter
         refreshHome()
 
@@ -38,20 +39,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun initStateObserver() {
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
+        viewModel.uiState.observe(viewLifecycleOwner, {
             when (viewModel.uiState.value) {
                 UIState.InProgress -> {
                     binding.imgState.visibility = View.GONE
-                    binding.searchProgressbar.visibility = View.VISIBLE
+                    binding.progressbarHome.visibility = View.VISIBLE
                 }
                 UIState.OnError -> {
                     binding.imgState.visibility = View.VISIBLE
-                    binding.searchProgressbar.visibility = View.GONE
+                    binding.progressbarHome.visibility = View.GONE
                     binding.imgState.setImageResource(R.drawable.ic_baseline_cloud_off_24)
                 }
                 UIState.OnSuccess -> {
                     binding.imgState.visibility = View.GONE
-                    binding.searchProgressbar.visibility = View.GONE
+                    binding.progressbarHome.visibility = View.GONE
                 }
                 else -> {
 
@@ -67,7 +68,7 @@ class HomeFragment : Fragment() {
 
     private fun refreshHome() {
         binding.refreshHome.setOnRefreshListener {
-            viewModel.getMarvelAppComics()
+            viewModel.getMarvelAppComics(null)
             binding.refreshHome.isRefreshing = false
         }
     }

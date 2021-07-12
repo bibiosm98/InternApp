@@ -2,13 +2,18 @@ package com.example.internapp.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.internapp.MainViewModel
 import com.example.internapp.databinding.ComicItemBinding
 import com.example.internapp.repository.Comic
 
-class ComicAdapter(private val fragment: HomeFragment, private val viewModel: MainViewModel) :
+class ComicAdapter(
+    private val fragment: Fragment,
+    private val viewModel: MainViewModel,
+    private val onComicSelected: (Int) -> Unit
+) :
     RecyclerView.Adapter<ComicViewHolder>() {
     private var comicList: List<Comic> = listOf()
 
@@ -28,7 +33,7 @@ class ComicAdapter(private val fragment: HomeFragment, private val viewModel: Ma
 
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            fragment.navigateToDetailFragment(position)
+            onComicSelected(position)
         }
         holder.bind(comicList[position])
     }

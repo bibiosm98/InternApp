@@ -30,20 +30,29 @@ class MainViewModel : ViewModel() {
     }
 
     init {
-        getMarvelAppComics()
+        getMarvelAppComics(null)
     }
 
-    fun getMarvelAppComics() {
+    fun getMarvelAppComics(title: String?) {
         _uiState.value = UIState.InProgress
         viewModelScope.launch(exceptionHandler) {
+            Log.i("TEXT2", title.toString())
             _comicList.value = listOf()
-            _comicList.value = MarvelApiRepository().getData()
+            _comicList.value = MarvelApiRepository().getData(title)
             _uiState.value = UIState.OnSuccess
         }
     }
 
     fun selectComic(position: Int) {
         _selectedComic.value = _comicList.value?.get(position)
+    }
+
+    fun setUIState(state: UIState) {
+        _uiState.value = state
+    }
+
+    fun clearComicList(){
+        _comicList.value = listOf()
     }
 
     fun getAuthors(): String {

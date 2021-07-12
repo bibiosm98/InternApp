@@ -10,8 +10,7 @@
             android:id="@+id/tvSignUpTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_margin="64dp"
             android:text="@string/textRegistrationTitle"
             android:textColor="@color/black"
             android:textSize="32sp"
@@ -22,8 +21,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilLogin"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:layout_marginTop="16dp"
             android:hint="@string/textHintLogin"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +40,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:layout_marginTop="16dp"
             android:hint="@string/textHintPassword"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +60,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPasswordRepeat"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:layout_marginTop="16dp"
             android:hint="@string/textHintPasswordRepeat"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +80,9 @@
 
         <Button
             android:id="@+id/btnSignUp"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="100dp"
             android:layout_marginTop="16dp"
             android:text="@string/textSignUp"
             app:layout_constraintEnd_toEndOf="parent"

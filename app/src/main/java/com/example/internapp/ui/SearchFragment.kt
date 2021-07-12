@@ -1,7 +1,6 @@
 package com.example.internapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,7 @@ class SearchFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: SearchFragmentBinding
     private lateinit var adapter: ComicAdapter
-    private lateinit var choosenTitle: String
+    private lateinit var chosenTitle: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +35,12 @@ class SearchFragment : Fragment() {
 
         binding.svComicSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.i("TEXT", query.toString())
-                choosenTitle = query.toString()
-                viewModel.getMarvelAppComics(query)
+                chosenTitle = query.toString()
+                viewModel.getMarvelAppComicsByTitle(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.i("TEXT", newText.toString())
                 return false
             }
         })
@@ -66,26 +63,26 @@ class SearchFragment : Fragment() {
                 UIState.OnWaiting -> {
                     binding.imgState.visibility = View.VISIBLE
                     binding.tvInfo.visibility = View.VISIBLE
-                    binding.progressbarSearch.visibility = View.GONE
+                    binding.pbSearch.visibility = View.GONE
                 }
                 UIState.InProgress -> {
                     binding.imgState.visibility = View.GONE
                     binding.tvInfo.visibility = View.GONE
-                    binding.progressbarSearch.visibility = View.VISIBLE
+                    binding.pbSearch.visibility = View.VISIBLE
                 }
                 UIState.OnError -> {
                     binding.imgState.visibility = View.VISIBLE
                     binding.imgState.setImageResource(R.drawable.ic_baseline_cloud_off_24)
-                    binding.progressbarSearch.visibility = View.GONE
+                    binding.pbSearch.visibility = View.GONE
                 }
                 UIState.OnSuccess -> {
                     binding.imgState.visibility = View.GONE
                     binding.tvInfo.visibility = View.GONE
-                    binding.progressbarSearch.visibility = View.GONE
-                    if (viewModel.comicList.value?.isEmpty() == true) {// OnEmptyList(wrong title)
+                    binding.pbSearch.visibility = View.GONE
+                    if (viewModel.comicList.value?.isEmpty() == true) {
                         binding.tvInfo.visibility = View.VISIBLE
                         binding.tvInfo.text =
-                            resources.getString(R.string.search_error, choosenTitle)
+                            resources.getString(R.string.search_error, chosenTitle)
                     }
                 }
                 else -> {

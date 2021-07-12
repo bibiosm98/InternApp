@@ -70,7 +70,7 @@
             tools:text="Start typing to find a particular comics." />
 
         <ProgressBar
-            android:id="@+id/progressbarSearch"
+            android:id="@+id/pbSearch"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:theme="@style/ProgressBarStyle"

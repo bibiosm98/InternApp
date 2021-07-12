@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressbarHome"
+            android:id="@+id/pbHome"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:theme="@style/ProgressBarStyle"

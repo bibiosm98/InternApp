@@ -43,16 +43,16 @@ class HomeFragment : Fragment() {
             when (viewModel.uiState.value) {
                 UIState.InProgress -> {
                     binding.imgState.visibility = View.GONE
-                    binding.progressbarHome.visibility = View.VISIBLE
+                    binding.pbHome.visibility = View.VISIBLE
                 }
                 UIState.OnError -> {
                     binding.imgState.visibility = View.VISIBLE
-                    binding.progressbarHome.visibility = View.GONE
+                    binding.pbHome.visibility = View.GONE
                     binding.imgState.setImageResource(R.drawable.ic_baseline_cloud_off_24)
                 }
                 UIState.OnSuccess -> {
                     binding.imgState.visibility = View.GONE
-                    binding.progressbarHome.visibility = View.GONE
+                    binding.pbHome.visibility = View.GONE
                 }
                 else -> {
 
@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
 
     private fun refreshHome() {
         binding.refreshHome.setOnRefreshListener {
-            viewModel.getMarvelAppComics(null)
+            viewModel.getAllMarvelAppComics()
             binding.refreshHome.isRefreshing = false
         }
     }

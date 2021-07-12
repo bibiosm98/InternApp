@@ -26,19 +26,26 @@ class MainViewModel : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         _uiState.value = UIState.OnError
-        Log.i("STATE", "ERROR?" + uiState.value.toString())
     }
 
     init {
-        getMarvelAppComics(null)
+        getAllMarvelAppComics()
     }
 
-    fun getMarvelAppComics(title: String?) {
+    fun getAllMarvelAppComics() {
         _uiState.value = UIState.InProgress
         viewModelScope.launch(exceptionHandler) {
-            Log.i("TEXT2", title.toString())
             _comicList.value = listOf()
-            _comicList.value = MarvelApiRepository().getData(title)
+            _comicList.value = MarvelApiRepository().getAllData()
+            _uiState.value = UIState.OnSuccess
+        }
+    }
+
+    fun getMarvelAppComicsByTitle(title: String?) {
+        _uiState.value = UIState.InProgress
+        viewModelScope.launch(exceptionHandler) {
+            _comicList.value = listOf()
+            _comicList.value = MarvelApiRepository().getMoviesWithTitles(title)
             _uiState.value = UIState.OnSuccess
         }
     }
@@ -51,7 +58,7 @@ class MainViewModel : ViewModel() {
         _uiState.value = state
     }
 
-    fun clearComicList(){
+    fun clearComicList() {
         _comicList.value = listOf()
     }
 

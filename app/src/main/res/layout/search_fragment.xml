@@ -4,66 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.internapp.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/svConstraint"
+        <SearchView
+            android:id="@+id/svComicSearch"
+            style="@style/Widget.AppCompat.Light.SearchView"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_margin="8dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            app:goIcon="@drawable/ic_round_home_24"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/svComicSearch"
-                style="@style/Widget.AppCompat.Light.SearchView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/rounded_background"
-                app:goIcon="@drawable/ic_round_home_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cancel_btn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cancel_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancelBtn"
-                android:textSize="20sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/comicSearchRecyclerView"
+            android:id="@+id/rvComicSearchView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="16dp"
             android:background="@color/white_two"
+            android:paddingBottom="?attr/actionBarSize"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/svConstraint"
+            app:layout_constraintTop_toBottomOf="@+id/svComicSearch"
             tools:itemCount="10"
             tools:listitem="@layout/comic_item" />
 
         <ImageView
-            android:id="@+id/search_image"
+            android:id="@+id/imgState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
@@ -74,7 +53,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/search_info"
+            android:id="@+id/tvInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -87,11 +66,11 @@
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_image"
+            app:layout_constraintTop_toBottomOf="@+id/imgState"
             tools:text="Start typing to find a particular comics." />
 
         <ProgressBar
-            android:id="@+id/search_progressbar"
+            android:id="@+id/pbSearch"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:theme="@style/ProgressBarStyle"

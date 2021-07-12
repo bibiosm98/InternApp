@@ -15,5 +15,13 @@
     <string name="find_out_more">Find out more</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textLoginTitle">Zaloguj się</string>
+    <string name="textHintLogin">Type Login or Email</string>
+    <string name="textHintPassword">Type password</string>
+    <string name="textLogIn">Zaloguj się</string>
+    <string name="textRegistration">Zarejestruj się</string>
+    <string name="textHintPasswordRepeat">Repeat password</string>
+    <string name="textSignUp">Zarejestruj się</string>
+    <string name="textRegistrationTitle">Załóż konto</string>
 
 </resources>

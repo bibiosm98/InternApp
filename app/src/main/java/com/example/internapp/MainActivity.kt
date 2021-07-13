@@ -17,9 +17,10 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.navigation_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
+        val fragmentsWithList = listOf(R.id.loginFragment, R.id.registrationFragment)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment, R.id.registrationFragment -> navView.visibility = View.GONE
+                in fragmentsWithList -> navView.visibility = View.GONE
                 else -> navView.visibility = View.VISIBLE
             }
 

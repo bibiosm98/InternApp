@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.internapp.R
 import com.example.internapp.databinding.LoginFragmentBinding
 import com.example.internapp.repository.UIState
+import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
     private val viewModel: AuthenticationViewModel by activityViewModels()
@@ -49,7 +51,11 @@ class LoginFragment : Fragment() {
                     viewModel.navigationDone()
                 }
                 else -> {
-
+                    Snackbar.make(
+                        requireView(),
+                        resources.getString(R.string.signInError),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

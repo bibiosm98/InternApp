@@ -26,5 +26,9 @@
     <string name="passwordDifference">Wprowadzone hasła nie są zgodne!</string>
     <string name="typeEmail">Podaj adres email</string>
     <string name="typePassword">Podaj hasło</string>
+    <string name="signUpError">Rejestracja zakończona niepowodzeniem!</string>
+    <string name="primitivePassword">121212</string>
+    <string name="primitiveEmail">12@wp.pl</string>
+    <string name="signInError">Logowanie nie powiodło się</string>
 
 </resources>

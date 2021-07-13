@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:ems="15"
                 android:inputType="text"
-                android:text="12@wp.pl" />
+                android:text="@string/primitiveEmail" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 android:ems="15"
                 android:inputType="textPassword"
-                android:text="121212" />
+                android:text="@string/primitivePassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

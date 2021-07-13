@@ -15,7 +15,6 @@ class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: HomeFragmentBinding
     private lateinit var adapter: ComicAdapter
-    private val fbAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +81,7 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout_action -> {
-                fbAuth.signOut()
+                viewModel.signOutUser()
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
             }
         }

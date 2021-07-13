@@ -21,4 +21,8 @@ class FirebaseRepository {
     fun signIn(email: String, password: String): Task<AuthResult> {
         return fbAuth.signInWithEmailAndPassword(email, password)
     }
+
+    fun signOut(){
+        fbAuth.signOut()
+    }
 }

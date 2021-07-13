@@ -73,7 +73,11 @@ class RegistrationFragment : Fragment() {
                     viewModel.navigationDone()
                 }
                 else -> {
-
+                    Snackbar.make(
+                        requireView(),
+                        resources.getString(R.string.signUpError),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

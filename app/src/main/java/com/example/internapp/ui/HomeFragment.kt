@@ -1,21 +1,21 @@
 package com.example.internapp.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
 import com.example.internapp.repository.UIState
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: HomeFragmentBinding
     private lateinit var adapter: ComicAdapter
+    private val fbAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +30,7 @@ class HomeFragment : Fragment() {
         binding.comicRecyclerView.adapter = adapter
         refreshHome()
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -71,5 +72,20 @@ class HomeFragment : Fragment() {
             viewModel.getAllMarvelAppComics()
             binding.refreshHome.isRefreshing = false
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.logout_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout_action -> {
+                fbAuth.signOut()
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

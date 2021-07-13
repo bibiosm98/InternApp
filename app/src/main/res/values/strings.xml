@@ -23,5 +23,8 @@
     <string name="textHintPasswordRepeat">Repeat password</string>
     <string name="textSignUp">Zarejestruj się</string>
     <string name="textRegistrationTitle">Załóż konto</string>
+    <string name="passwordDifference">Wprowadzone hasła nie są zgodne!</string>
+    <string name="typeEmail">Podaj adres email</string>
+    <string name="typePassword">Podaj hasło</string>
 
 </resources>

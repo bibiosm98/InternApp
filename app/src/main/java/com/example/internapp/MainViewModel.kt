@@ -1,17 +1,18 @@
 package com.example.internapp
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.internapp.repository.Comic
+import com.example.internapp.repository.FirebaseRepository
 import com.example.internapp.repository.MarvelApiRepository
 import com.example.internapp.repository.UIState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+    val repository = FirebaseRepository()
     private val _comicList = MutableLiveData<List<Comic>?>()
     val comicList: LiveData<List<Comic>?>
         get() = _comicList
@@ -73,5 +74,10 @@ class MainViewModel : ViewModel() {
             authorsList = authorsList.substring(0, authorsList.length - 2);
         }
         return authorsList
+    }
+
+    fun signOutUser() {
+        _uiState.value = UIState.InProgress
+        repository.signOut()
     }
 }

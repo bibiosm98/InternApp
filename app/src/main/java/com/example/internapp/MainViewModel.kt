@@ -21,6 +21,8 @@ class MainViewModel : ViewModel() {
     val selectedComic: LiveData<Comic>
         get() = _selectedComic
 
+    private val _navigatedFromHome = MutableLiveData<Boolean>()
+
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>
         get() = _uiState
@@ -30,6 +32,7 @@ class MainViewModel : ViewModel() {
     }
 
     init {
+        _navigatedFromHome.value = true
         getAllMarvelAppComics()
     }
 
@@ -59,8 +62,24 @@ class MainViewModel : ViewModel() {
         _uiState.value = state
     }
 
+    fun navigatedFrom(){
+        _navigatedFromHome.value = false
+    }
+
+    fun isComicListEmpty(){
+        if(_comicList.value?.size == 0){
+            _uiState.value = UIState.InProgress
+            getAllMarvelAppComics()
+        }else{
+            _uiState.value = UIState.OnSuccess
+        }
+    }
+
     fun clearComicList() {
-        _comicList.value = listOf()
+        if(_navigatedFromHome.value == true){
+            _comicList.value = listOf()
+            _uiState.value = UIState.OnWaiting
+        }
     }
 
     fun getAuthors(): String {
@@ -77,7 +96,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun signOutUser() {
-        _uiState.value = UIState.InProgress
+        _uiState.value = UIState.OnWaiting
         repository.signOut()
     }
 }

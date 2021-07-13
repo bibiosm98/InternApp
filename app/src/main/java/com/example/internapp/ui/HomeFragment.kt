@@ -9,7 +9,6 @@ import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
 import com.example.internapp.repository.UIState
-import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
@@ -35,6 +34,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.isComicListEmpty()
         initStateObserver()
     }
 

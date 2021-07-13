@@ -2,6 +2,7 @@ package com.example.internapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,11 +27,20 @@ class MainActivity : AppCompatActivity() {
 
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.homeFragment, R.id.searchFragment
+                    R.id.loginFragment, R.id.homeFragment
                 )
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return super.onCreateOptionsMenu(menu)
     }
 }

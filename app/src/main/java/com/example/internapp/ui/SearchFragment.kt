@@ -29,9 +29,8 @@ class SearchFragment : Fragment() {
             navigateToDetailFragment(it)
         }
         binding.rvComicSearchView.adapter = adapter
-        viewModel.setUIState(UIState.OnWaiting)
+        //viewModel.setUIState(UIState.OnWaiting)
         viewModel.clearComicList()
-
 
         binding.svComicSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -48,6 +47,7 @@ class SearchFragment : Fragment() {
     }
 
     fun navigateToDetailFragment(position: Int) {
+        viewModel.navigatedFrom()
         this.findNavController()
             .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(position))
     }

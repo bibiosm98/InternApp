@@ -29,7 +29,6 @@ class SearchFragment : Fragment() {
             navigateToDetailFragment(it)
         }
         binding.rvComicSearchView.adapter = adapter
-        //viewModel.setUIState(UIState.OnWaiting)
         viewModel.clearComicList()
 
         binding.svComicSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

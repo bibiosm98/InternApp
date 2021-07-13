@@ -69,15 +69,22 @@ class RegistrationFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, {
             when (viewModel.uiState.value) {
                 UIState.OnSuccess -> {
+                    binding.pbRegistration.visibility = View.GONE
                     findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
                     viewModel.navigationDone()
                 }
-                else -> {
+                UIState.InProgress -> {
+                    binding.pbRegistration.visibility = View.VISIBLE
+                }
+                UIState.OnError -> {
+                    binding.pbRegistration.visibility = View.GONE
                     Snackbar.make(
                         requireView(),
                         resources.getString(R.string.signUpError),
                         Snackbar.LENGTH_SHORT
                     ).show()
+                }
+                else -> {
                 }
             }
         })

@@ -15,7 +15,8 @@
             app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
+            app:destination="@id/registrationFragment"
+            app:launchSingleTop="false" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"

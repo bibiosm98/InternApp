@@ -47,15 +47,22 @@ class LoginFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, {
             when (viewModel.uiState.value) {
                 UIState.OnSuccess -> {
+                    binding.pbLogin.visibility = View.GONE
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                     viewModel.navigationDone()
                 }
-                else -> {
+                UIState.InProgress -> {
+                    binding.pbLogin.visibility = View.VISIBLE
+                }
+                UIState.OnError -> {
+                    binding.pbLogin.visibility = View.GONE
                     Snackbar.make(
                         requireView(),
                         resources.getString(R.string.signInError),
                         Snackbar.LENGTH_SHORT
                     ).show()
+                }
+                else -> {
                 }
             }
         })

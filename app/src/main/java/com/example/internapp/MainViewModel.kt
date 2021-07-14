@@ -8,6 +8,7 @@ import com.example.internapp.repository.Comic
 import com.example.internapp.repository.FirebaseRepository
 import com.example.internapp.repository.MarvelApiRepository
 import com.example.internapp.repository.UIState
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
@@ -62,21 +63,21 @@ class MainViewModel : ViewModel() {
         _uiState.value = state
     }
 
-    fun navigatedFrom(){
+    fun navigatedFrom() {
         _navigatedFromHome.value = false
     }
 
-    fun isComicListEmpty(){
-        if(_comicList.value?.size == 0){
+    fun isComicListEmpty() {
+        if (_comicList.value?.size == 0) {
             _uiState.value = UIState.InProgress
             getAllMarvelAppComics()
-        }else{
+        } else {
             _uiState.value = UIState.OnSuccess
         }
     }
 
     fun clearComicList() {
-        if(_navigatedFromHome.value == true){
+        if (_navigatedFromHome.value == true) {
             _comicList.value = listOf()
             _uiState.value = UIState.OnWaiting
         }
@@ -98,5 +99,9 @@ class MainViewModel : ViewModel() {
     fun signOutUser() {
         _uiState.value = UIState.OnWaiting
         repository.signOut()
+    }
+
+    fun getUserData(): String? {
+        return repository.currentUser()?.email
     }
 }

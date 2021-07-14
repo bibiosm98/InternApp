@@ -21,16 +21,17 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
-
+        binding.view = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvUserName.text = resources.getString(R.string.welcome, viewModel.getUserData())
-        binding.ivLogout.setOnClickListener {
-            viewModel.signOutUser()
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-        }
+    }
+
+    fun logOut(){
+        viewModel.signOutUser()
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
     }
 }

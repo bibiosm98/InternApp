@@ -83,10 +83,6 @@ class HomeFragment : Fragment() {
             R.id.profile_action -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
             }
-            R.id.logout_action -> {
-                viewModel.signOutUser()
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-            }
         }
         return super.onOptionsItemSelected(item)
     }

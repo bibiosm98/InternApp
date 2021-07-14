@@ -30,6 +30,8 @@
     <string name="primitivePassword">121212</string>
     <string name="primitiveEmail">12@wp.pl</string>
     <string name="signInError">Logowanie nie powiodło się</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Wyloguj się</string>
+    <string name="profile">Profil</string>
+    <string name="welcome">Witaj "%s" :)</string>
 
 </resources>

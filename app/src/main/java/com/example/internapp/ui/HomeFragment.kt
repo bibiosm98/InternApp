@@ -80,9 +80,8 @@ class HomeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.logout_action -> {
-                viewModel.signOutUser()
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+            R.id.profile_action -> {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
             }
         }
         return super.onOptionsItemSelected(item)

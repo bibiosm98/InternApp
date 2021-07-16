@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
                         backPressCount++
                         Snackbar.make(
                             requireView(),
-                            resources.getString(R.string.tapAgain),
+                            resources.getString(R.string.pressAgain),
                             Snackbar.LENGTH_LONG
                         ).show()
                     }

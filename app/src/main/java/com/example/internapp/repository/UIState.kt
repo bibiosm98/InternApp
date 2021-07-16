@@ -5,4 +5,5 @@ sealed class UIState {
     object OnError : UIState()
     object InProgress : UIState()
     object OnWaiting : UIState()
+    object OnNotLoggedIn : UIState()
 }

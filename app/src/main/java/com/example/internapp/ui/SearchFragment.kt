@@ -44,6 +44,7 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
+
         return binding.root
     }
 

@@ -39,6 +39,7 @@ class MainViewModel @Inject constructor(
     init {
         _navigatedFromHome.value = true
         getAllMarvelAppComics()
+        isUserLoggedIn()
     }
 
     fun getAllMarvelAppComics() {
@@ -107,5 +108,14 @@ class MainViewModel @Inject constructor(
 
     fun getUserData(): String? {
         return repository.currentUser()?.email
+    }
+
+    fun isUserLoggedIn() {
+        _uiState.value = UIState.InProgress
+        if (repository.isUserLoggedIn()) {
+            _uiState.value = UIState.OnSuccess
+        } else {
+            _uiState.value = UIState.OnNotLoggedIn
+        }
     }
 }

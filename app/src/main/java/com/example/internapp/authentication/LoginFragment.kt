@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.internapp.R
@@ -15,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 class LoginFragment : Fragment() {
     private val viewModel: AuthenticationViewModel by activityViewModels()
     private lateinit var binding: LoginFragmentBinding
+    private var backPressCount: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +30,27 @@ class LoginFragment : Fragment() {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
         }
         initStateObserver()
+        overrideBackButton()
         return binding.root
+    }
+
+    private fun overrideBackButton() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (backPressCount >= 1) {
+                        requireActivity().finish()
+                    } else {
+                        backPressCount++
+                        Snackbar.make(
+                            requireView(),
+                            resources.getString(R.string.pressAgain),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            })
     }
 
     private fun authenticateUser() {
@@ -36,11 +58,6 @@ class LoginFragment : Fragment() {
         val password = binding.tietPassword.text?.trim().toString()
 
         viewModel.authenticateUser(email, password)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.isCurrentUser()
     }
 
     private fun initStateObserver() {

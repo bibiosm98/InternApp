@@ -13,6 +13,10 @@ class AuthenticationViewModel : ViewModel() {
     val uiState: LiveData<UIState>
         get() = _uiState
 
+    init {
+        _uiState.value = UIState.OnWaiting
+    }
+
     fun createUser(email: String, password: String) {
         _uiState.value = UIState.InProgress
         repository.signUp(email, password)
@@ -37,9 +41,16 @@ class AuthenticationViewModel : ViewModel() {
         _uiState.value = UIState.OnWaiting
     }
 
-    fun isCurrentUser() {
-        if (repository.currentUser() != null) {
+    fun setUIState(state: UIState) {
+        _uiState.value = state
+    }
+
+    fun isUserLoggedIn() {
+        _uiState.value = UIState.InProgress
+        if (repository.isUserLoggedIn()) {
             _uiState.value = UIState.OnSuccess
+        } else {
+            _uiState.value = UIState.OnNotLoggedIn
         }
     }
 }

@@ -8,7 +8,6 @@ import com.example.internapp.repository.Comic
 import com.example.internapp.repository.FirebaseRepository
 import com.example.internapp.repository.MarvelApiRepository
 import com.example.internapp.repository.UIState
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
@@ -35,6 +34,7 @@ class MainViewModel : ViewModel() {
     init {
         _navigatedFromHome.value = true
         getAllMarvelAppComics()
+        isUserLoggedIn()
     }
 
     fun getAllMarvelAppComics() {
@@ -103,5 +103,14 @@ class MainViewModel : ViewModel() {
 
     fun getUserData(): String? {
         return repository.currentUser()?.email
+    }
+
+    fun isUserLoggedIn() {
+        _uiState.value = UIState.InProgress
+        if (repository.isUserLoggedIn()) {
+            _uiState.value = UIState.OnSuccess
+        } else {
+            _uiState.value = UIState.OnNotLoggedIn
+        }
     }
 }

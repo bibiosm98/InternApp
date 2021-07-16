@@ -33,5 +33,6 @@
     <string name="logout">Wyloguj się</string>
     <string name="profile">Profil</string>
     <string name="welcome">Witaj "%s" :)</string>
+    <string name="tapAgain">Wcisnij ponownie aby wyjsc.</string>
 
 </resources>

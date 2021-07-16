@@ -10,6 +10,13 @@ import com.google.firebase.ktx.Firebase
 class FirebaseRepository {
     private val fbAuth = FirebaseAuth.getInstance()
 
+    fun isUserLoggedIn(): Boolean {
+        Firebase.auth.currentUser?.let {
+            return true
+        }
+        return false
+    }
+
     fun currentUser(): FirebaseUser? {
         return Firebase.auth.currentUser
     }
@@ -22,7 +29,7 @@ class FirebaseRepository {
         return fbAuth.signInWithEmailAndPassword(email, password)
     }
 
-    fun signOut(){
+    fun signOut() {
         fbAuth.signOut()
     }
 }

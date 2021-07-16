@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InternApp.Launcher">
-<!--        android:theme="@style/Theme.InternApp">-->
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.InternApp.Launcher">

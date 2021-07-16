@@ -13,7 +13,9 @@ import com.example.internapp.databinding.DetailFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: DetailFragmentBinding

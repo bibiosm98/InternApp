@@ -12,7 +12,9 @@ import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.SearchFragmentBinding
 import com.example.internapp.repository.UIState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: SearchFragmentBinding

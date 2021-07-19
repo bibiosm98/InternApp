@@ -12,8 +12,9 @@ import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
 import com.example.internapp.repository.UIState
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: HomeFragmentBinding

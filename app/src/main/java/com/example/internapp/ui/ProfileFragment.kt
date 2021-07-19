@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.FragmentProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentProfileBinding

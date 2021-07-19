@@ -8,10 +8,15 @@ import com.example.internapp.repository.Comic
 import com.example.internapp.repository.FirebaseRepository
 import com.example.internapp.repository.MarvelApiRepository
 import com.example.internapp.repository.UIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val marvelApiRepository: MarvelApiRepository
+) : ViewModel() {
     val repository = FirebaseRepository()
     private val _comicList = MutableLiveData<List<Comic>?>()
     val comicList: LiveData<List<Comic>?>
@@ -41,7 +46,7 @@ class MainViewModel : ViewModel() {
         _uiState.value = UIState.InProgress
         viewModelScope.launch(exceptionHandler) {
             _comicList.value = listOf()
-            _comicList.value = MarvelApiRepository().getAllData()
+            _comicList.value = marvelApiRepository.getAllData()
             _uiState.value = UIState.OnSuccess
         }
     }
@@ -50,7 +55,7 @@ class MainViewModel : ViewModel() {
         _uiState.value = UIState.InProgress
         viewModelScope.launch(exceptionHandler) {
             _comicList.value = listOf()
-            _comicList.value = MarvelApiRepository().getMoviesWithTitles(title)
+            _comicList.value = marvelApiRepository.getMoviesWithTitles(title)
             _uiState.value = UIState.OnSuccess
         }
     }

@@ -12,7 +12,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.internapp.databinding.SplashFragmentBinding
 import com.example.internapp.ui.SplashFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_InternApp)

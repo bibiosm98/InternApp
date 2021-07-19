@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
         super.onStart()
         Handler().postDelayed({
             viewModel.isUserLoggedIn()
-        }, 3000)
+        }, 1000)
     }
 
     override fun onResume() {

@@ -23,6 +23,7 @@
                 android:id="@+id/comic_item_imageView"
                 android:layout_width="115dp"
                 android:layout_height="174dp"
+                android:layout_marginRight="8dp"
                 android:contentDescription="@string/details"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

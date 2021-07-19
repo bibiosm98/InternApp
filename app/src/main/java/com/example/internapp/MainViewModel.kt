@@ -82,9 +82,11 @@ class MainViewModel @Inject constructor(
     }
 
     fun clearComicList() {
+        _comicList.value = listOf()
         if (_navigatedFromHome.value == true) {
-            _comicList.value = listOf()
             _uiState.value = UIState.OnWaiting
+        }else{
+            _uiState.value = UIState.InProgress
         }
     }
 

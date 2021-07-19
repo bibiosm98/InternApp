@@ -10,7 +10,7 @@ interface MarvelApiService {
         @Query("ts") timestamp: String,
         @Query("apikey") apiKey: String,
         @Query("hash") hash: String,
-        @Query("sharedAppearances") title: String?,
+        @Query("titleStartsWith") title: String?,
         @Query("limit") limit: Int?
     ): Response<ComicProperty>
 }

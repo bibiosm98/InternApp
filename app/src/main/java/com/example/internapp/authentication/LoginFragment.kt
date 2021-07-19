@@ -28,8 +28,8 @@ class LoginFragment : Fragment() {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
 
         binding.btnLogin.setOnClickListener {
-            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+            val keyboard = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            keyboard.hideSoftInputFromWindow(requireView().windowToken, 0)
             authenticateUser()
         }
         binding.btnToRegistration.setOnClickListener {

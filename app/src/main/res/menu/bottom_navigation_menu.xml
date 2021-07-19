@@ -3,16 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        tools:override="true"
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_round_home_24"
-        android:title="@string/title_home"
-        />
+        tools:override="true" />
 
     <item
-        tools:override="true"
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/title_search"
-        />
+        tools:override="true" />
 </menu>

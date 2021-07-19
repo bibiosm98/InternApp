@@ -7,12 +7,14 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
 import com.example.internapp.repository.UIState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -30,9 +32,10 @@ class HomeFragment : Fragment() {
         adapter = ComicAdapter(this, viewModel) {
             navigateToDetailFragment(it)
         }
-        binding.comicRecyclerView.adapter = adapter
+        binding.rvComicHome.adapter = adapter
         refreshHome()
 
+        viewModel.clearComicList()
         setHasOptionsMenu(true)
         overrideBackButton()
         return binding.root

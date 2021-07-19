@@ -59,7 +59,8 @@ class SplashFragment : Fragment() {
                     findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
                     viewModel.navigationDone()
                 }
-                else -> {}
+                else -> {
+                }
             }
         })
     }

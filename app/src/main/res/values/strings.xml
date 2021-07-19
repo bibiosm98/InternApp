@@ -13,13 +13,12 @@
     <string name="written_by">written by</string>
     <string name="find_out_more">Find out more</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="textLoginTitle">Zaloguj się</string>
-    <string name="textHintLogin">Type Login or Email</string>
-    <string name="textHintPassword">Type password</string>
+    <string name="textHintLogin">Type Email</string>
+    <string name="textHintPassword">Type Password</string>
     <string name="textLogIn">Zaloguj się</string>
     <string name="textRegistration">Zarejestruj się</string>
-    <string name="textHintPasswordRepeat">Repeat password</string>
+    <string name="textHintPasswordRepeat">Repeat Password</string>
     <string name="textSignUp">Zarejestruj się</string>
     <string name="textRegistrationTitle">Załóż konto</string>
     <string name="passwordDifference">Wprowadzone hasła nie są zgodne!</string>
@@ -33,5 +32,8 @@
     <string name="profile">Profil</string>
     <string name="welcome">Witaj "%s" :)</string>
     <string name="pressAgain">Wciśnij ponownie aby wyjść.</string>
+    <string name="noEmail">Podaj adres email.</string>
+    <string name="noPassword">Podaj hasło.</string>
+    <string name="requiredPasswordSize">Hasło wymaga minimum 6 znaków.</string>
 
 </resources>

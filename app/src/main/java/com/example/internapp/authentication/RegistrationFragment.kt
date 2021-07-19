@@ -13,7 +13,9 @@ import com.example.internapp.R
 import com.example.internapp.databinding.RegistrationFragmentBinding
 import com.example.internapp.repository.UIState
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegistrationFragment : Fragment() {
     private val viewModel: AuthenticationViewModel by activityViewModels()
     private lateinit var binding: RegistrationFragmentBinding
@@ -29,6 +31,7 @@ class RegistrationFragment : Fragment() {
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireView().windowToken, 0)
         }
+        viewModel.setUIState(UIState.OnWaiting)
         initStateObserver()
         return binding.root
     }
@@ -53,6 +56,15 @@ class RegistrationFragment : Fragment() {
                 Snackbar.LENGTH_SHORT
             ).show()
             return
+        }else{
+            if(password.length<6){
+                Snackbar.make(
+                    requireView(),
+                    resources.getString(R.string.requiredPasswordSize),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return
+            }
         }
         if (password == passwordRepeat) {
             viewModel.createUser(email, password)
@@ -75,6 +87,9 @@ class RegistrationFragment : Fragment() {
                 }
                 UIState.InProgress -> {
                     binding.pbRegistration.visibility = View.VISIBLE
+                }
+                UIState.OnWaiting -> {
+                    binding.pbRegistration.visibility = View.GONE
                 }
                 UIState.OnError -> {
                     binding.pbRegistration.visibility = View.GONE

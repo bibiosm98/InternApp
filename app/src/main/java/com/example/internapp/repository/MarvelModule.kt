@@ -10,29 +10,42 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 object MarvelModule {
-    private const val BASE_URL = "https://gateway.marvel.com/"
-    private val builder = OkHttpClient.Builder()
-        .connectTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
-        .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-        .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-    private val client = builder.build()
-
-    private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .client(client)
-        .build()
 
     @Provides
-    fun provideMarvelApiService(): MarvelApiService = retrofit.create(MarvelApiService::class.java)
+    fun provideBaseUrl(): String {
+        return "https://gateway.marvel.com/"
+    }
+
+    @Provides
+    fun provideClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
+            .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+            .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS).build()
+    }
+
+    @Provides
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
+
+    @Provides
+    fun provideRetrofit(BASE_URL: String, moshi: Moshi, client: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .client(client)
+            .build()
+    }
+
+    @Provides
+    fun provideMarvelApiService(retrofit: Retrofit): MarvelApiService =
+        retrofit.create(MarvelApiService::class.java)
 }

@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
         super.onStart()
         Handler().postDelayed({
             viewModel.isUserLoggedIn()
-        }, 1000)
+        }, 3000)
     }
 
     override fun onResume() {
@@ -59,7 +59,8 @@ class SplashFragment : Fragment() {
                     findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
                     viewModel.navigationDone()
                 }
-                else -> {}
+                else -> {
+                }
             }
         })
     }

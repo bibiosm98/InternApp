@@ -11,8 +11,6 @@ import androidx.fragment.app.activityViewModels
 import com.example.internapp.MainViewModel
 import com.example.internapp.databinding.DetailFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

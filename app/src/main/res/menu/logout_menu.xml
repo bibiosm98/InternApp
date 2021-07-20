@@ -4,6 +4,6 @@
     <item
         android:id="@+id/profile_action"
         android:icon="@drawable/ic_outline_account_circle_24"
-        android:title="@string/profile"
+        android:title=""
         app:showAsAction="ifRoom" />
 </menu>

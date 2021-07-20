@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/rounded_background"
+            android:iconifiedByDefault="false"
             android:padding="4dp"
             android:queryBackground="@null"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +47,8 @@
 
         <ImageView
             android:id="@+id/imgState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/progress_bar_dimen"
+            android:layout_height="@dimen/progress_bar_dimen"
             android:layout_marginBottom="100dp"
             android:src="@drawable/book_open_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -74,8 +75,8 @@
 
         <ProgressBar
             android:id="@+id/pbSearch"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/progress_bar_dimen"
+            android:layout_height="@dimen/progress_bar_dimen"
             android:theme="@style/ProgressBarStyle"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

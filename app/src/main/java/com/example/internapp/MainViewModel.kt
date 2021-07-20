@@ -17,7 +17,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val marvelApiRepository: MarvelApiRepository
 ) : ViewModel() {
+
     val repository = FirebaseRepository()
+    private var backupComicList: List<Comic> = listOf()
     private val _comicList = MutableLiveData<List<Comic>?>()
     val comicList: LiveData<List<Comic>?>
         get() = _comicList
@@ -26,20 +28,26 @@ class MainViewModel @Inject constructor(
     val selectedComic: LiveData<Comic>
         get() = _selectedComic
 
-    private val _navigatedFromHome = MutableLiveData<Boolean>()
+    private val _overrideComicList = MutableLiveData<Boolean>()
+    val overrideComicList: LiveData<Boolean>
+        get() = _overrideComicList
 
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>
         get() = _uiState
+
+    private val _bottomSheetState = MutableLiveData<Int>()
+    val bottomSheetState: LiveData<Int>
+        get() = _bottomSheetState
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         _uiState.value = UIState.OnError
     }
 
     init {
-        _navigatedFromHome.value = true
-        getAllMarvelAppComics()
         isUserLoggedIn()
+        _comicList.value = listOf()
+        _overrideComicList.value = false
     }
 
     fun getAllMarvelAppComics() {
@@ -47,6 +55,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             _comicList.value = listOf()
             _comicList.value = marvelApiRepository.getAllData()
+            _comicList.value?.let {
+                backupComicList = it
+            }
             _uiState.value = UIState.OnSuccess
         }
     }
@@ -68,8 +79,8 @@ class MainViewModel @Inject constructor(
         _uiState.value = state
     }
 
-    fun navigatedFrom() {
-        _navigatedFromHome.value = false
+    fun overrideComicList(bool: Boolean) {
+        _overrideComicList.value = bool
     }
 
     fun isComicListEmpty() {
@@ -81,11 +92,19 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun checkBackupComicList() {
+        if (backupComicList.isNotEmpty()) {
+            _comicList.value = backupComicList
+        } else {
+            getAllMarvelAppComics()
+        }
+    }
+
     fun clearComicList() {
         _comicList.value = listOf()
-        if (_navigatedFromHome.value == true) {
+        if (_overrideComicList.value == false) {
             _uiState.value = UIState.OnWaiting
-        }else{
+        } else {
             _uiState.value = UIState.InProgress
         }
     }
@@ -106,6 +125,10 @@ class MainViewModel @Inject constructor(
     fun signOutUser() {
         _uiState.value = UIState.OnWaiting
         repository.signOut()
+    }
+
+    fun setBottomSheetState(state: Int) {
+        _bottomSheetState.value = state
     }
 
     fun getUserData(): String? {

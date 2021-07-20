@@ -13,7 +13,6 @@ import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.SearchFragmentBinding
 import com.example.internapp.repository.UIState
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +21,6 @@ class SearchFragment : Fragment() {
     private lateinit var binding: SearchFragmentBinding
     private lateinit var adapter: ComicAdapter
     private lateinit var chosenTitle: String
-    private var backPressCount: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +32,6 @@ class SearchFragment : Fragment() {
             navigateToDetailFragment(it)
         }
         binding.rvComicSearchView.adapter = adapter
-        viewModel.clearComicList()
-
         binding.svComicSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 chosenTitle = query.toString()
@@ -48,38 +44,20 @@ class SearchFragment : Fragment() {
             }
         })
         overrideBackButton()
+        if (viewModel.overrideComicList.value == false) viewModel.clearComicList()
 
         return binding.root
-    }
-
-    private fun overrideBackButton() {
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (backPressCount >= 1) {
-                        requireActivity().finish()
-                    } else {
-                        backPressCount++
-                        Snackbar.make(
-                            requireView(),
-                            resources.getString(R.string.pressAgain),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            })
-    }
-
-    fun navigateToDetailFragment(position: Int) {
-        viewModel.navigatedFrom()
-        this.findNavController()
-            .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(position))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initStateObserver()
+    }
+
+    fun navigateToDetailFragment(position: Int) {
+        viewModel.overrideComicList(true)
+        this.findNavController()
+            .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(position))
     }
 
     private fun initStateObserver() {
@@ -114,5 +92,15 @@ class SearchFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun overrideBackButton() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToHomeFragment())
+                }
+            })
     }
 }

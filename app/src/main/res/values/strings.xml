@@ -29,7 +29,6 @@
     <string name="primitiveEmail">12@wp.pl</string>
     <string name="signInError">Logowanie nie powiodło się</string>
     <string name="logout">Wyloguj się</string>
-    <string name="profile">Profil</string>
     <string name="welcome">Witaj "%s" :)</string>
     <string name="pressAgain">Wciśnij ponownie aby wyjść.</string>
     <string name="noEmail">Podaj adres email.</string>

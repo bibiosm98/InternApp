@@ -60,7 +60,7 @@ class DetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         BottomSheetBehavior.from(binding.bottomSheet).apply {
-            viewModel.bottomSheetState.value?.let{
+            viewModel.bottomSheetState.value?.let {
                 state = it
             }
         }

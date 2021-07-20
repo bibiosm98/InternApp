@@ -1,6 +1,5 @@
 package com.example.internapp
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,7 +47,6 @@ class MainViewModel @Inject constructor(
     init {
         isUserLoggedIn()
         _comicList.value = listOf()
-        Log.i("TAG", _comicList.value?.size.toString())
         _overrideComicList.value = false
     }
 
@@ -57,8 +55,8 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             _comicList.value = listOf()
             _comicList.value = marvelApiRepository.getAllData()
-            _comicList.value?.let{
-                 backupComicList = it
+            _comicList.value?.let {
+                backupComicList = it
             }
             _uiState.value = UIState.OnSuccess
         }

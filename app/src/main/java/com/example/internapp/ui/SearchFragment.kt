@@ -13,7 +13,6 @@ import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.SearchFragmentBinding
 import com.example.internapp.repository.UIState
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +21,6 @@ class SearchFragment : Fragment() {
     private lateinit var binding: SearchFragmentBinding
     private lateinit var adapter: ComicAdapter
     private lateinit var chosenTitle: String
-    private var backPressCount: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,16 +99,7 @@ class SearchFragment : Fragment() {
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    if (backPressCount >= 1) {
-                        requireActivity().finish()
-                    } else {
-                        backPressCount++
-                        Snackbar.make(
-                            requireView(),
-                            resources.getString(R.string.pressAgain),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                    }
+                    findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToHomeFragment())
                 }
             })
     }

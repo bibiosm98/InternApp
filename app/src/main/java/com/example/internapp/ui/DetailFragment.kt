@@ -60,19 +60,8 @@ class DetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         BottomSheetBehavior.from(binding.bottomSheet).apply {
-            when (viewModel.bottomSheetState.value) {
-                2 -> {
-                    state = BottomSheetBehavior.STATE_HALF_EXPANDED
-                }
-                3 -> {
-                    state = BottomSheetBehavior.STATE_EXPANDED
-                }
-                4 -> {
-                    state = BottomSheetBehavior.STATE_COLLAPSED
-                }
-                else -> {
-
-                }
+            viewModel.bottomSheetState.value?.let{
+                state = it
             }
         }
     }

@@ -44,7 +44,7 @@ class SearchFragment : Fragment() {
             }
         })
         overrideBackButton()
-        if (viewModel.navigatedFromHome.value == true) viewModel.clearComicList()
+        if (viewModel.overrideComicList.value == false) viewModel.clearComicList()
 
         return binding.root
     }
@@ -55,7 +55,7 @@ class SearchFragment : Fragment() {
     }
 
     fun navigateToDetailFragment(position: Int) {
-        viewModel.navigatedFromHome(false)
+        viewModel.overrideComicList(true)
         this.findNavController()
             .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(position))
     }

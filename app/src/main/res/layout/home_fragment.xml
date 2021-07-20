@@ -41,8 +41,8 @@
 
         <ImageView
             android:id="@+id/imgState"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/image_info_dimen"
+            android:layout_height="@dimen/image_info_dimen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +50,8 @@
 
         <ProgressBar
             android:id="@+id/pbHome"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/progress_bar_dimen"
+            android:layout_height="@dimen/progress_bar_dimen"
             android:theme="@style/ProgressBarStyle"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

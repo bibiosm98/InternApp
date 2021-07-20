@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.internapp.MainViewModel
 import com.example.internapp.databinding.ComicItemBinding
 import com.example.internapp.repository.Comic
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ComicAdapter(
     private val fragment: Fragment,
@@ -24,7 +25,7 @@ class ComicAdapter(
                 notifyDataSetChanged()
             }
         })
-        viewModel.setBottomSheetState(2)
+        viewModel.setBottomSheetState(BottomSheetBehavior.STATE_HALF_EXPANDED)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {

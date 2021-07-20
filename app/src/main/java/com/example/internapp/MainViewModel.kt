@@ -1,5 +1,6 @@
 package com.example.internapp
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,8 +20,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val repository = FirebaseRepository()
-
-    private val _backupHomeComicList = MutableLiveData<List<Comic>?>()
+    private var backupComicList: List<Comic> = listOf()
     private val _comicList = MutableLiveData<List<Comic>?>()
     val comicList: LiveData<List<Comic>?>
         get() = _comicList
@@ -29,9 +29,9 @@ class MainViewModel @Inject constructor(
     val selectedComic: LiveData<Comic>
         get() = _selectedComic
 
-    private val _navigatedFromHome = MutableLiveData<Boolean>()
-    val navigatedFromHome: LiveData<Boolean>
-        get() = _navigatedFromHome
+    private val _overrideComicList = MutableLiveData<Boolean>()
+    val overrideComicList: LiveData<Boolean>
+        get() = _overrideComicList
 
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>
@@ -46,8 +46,10 @@ class MainViewModel @Inject constructor(
     }
 
     init {
-        _navigatedFromHome.value = true
         isUserLoggedIn()
+        _comicList.value = listOf()
+        Log.i("TAG", _comicList.value?.size.toString())
+        _overrideComicList.value = false
     }
 
     fun getAllMarvelAppComics() {
@@ -55,7 +57,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             _comicList.value = listOf()
             _comicList.value = marvelApiRepository.getAllData()
-            _backupHomeComicList.value = _comicList.value
+            _comicList.value?.let{
+                 backupComicList = it
+            }
             _uiState.value = UIState.OnSuccess
         }
     }
@@ -77,12 +81,12 @@ class MainViewModel @Inject constructor(
         _uiState.value = state
     }
 
-    fun navigatedFromHome(bool: Boolean) {
-        _navigatedFromHome.value = bool
+    fun overrideComicList(bool: Boolean) {
+        _overrideComicList.value = bool
     }
 
     fun isComicListEmpty() {
-        if (_comicList.value?.size == null) {
+        if (_comicList.value?.size == 0) {
             _uiState.value = UIState.InProgress
             getAllMarvelAppComics()
         } else {
@@ -91,8 +95,8 @@ class MainViewModel @Inject constructor(
     }
 
     fun checkBackupComicList() {
-        if (_backupHomeComicList.value?.size != 0) {
-            _comicList.value = _backupHomeComicList.value
+        if (backupComicList.isNotEmpty()) {
+            _comicList.value = backupComicList
         } else {
             getAllMarvelAppComics()
         }
@@ -100,7 +104,7 @@ class MainViewModel @Inject constructor(
 
     fun clearComicList() {
         _comicList.value = listOf()
-        if (_navigatedFromHome.value == true) {
+        if (_overrideComicList.value == false) {
             _uiState.value = UIState.OnWaiting
         } else {
             _uiState.value = UIState.InProgress

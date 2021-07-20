@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         binding.rvComicHome.adapter = adapter
         refreshHome()
 
-        viewModel.navigatedFromHome(true)
+        viewModel.overrideComicList(false)
         viewModel.checkBackupComicList()
         setHasOptionsMenu(true)
         overrideBackButton()

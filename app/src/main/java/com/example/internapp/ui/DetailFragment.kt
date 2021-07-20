@@ -31,20 +31,49 @@ class DetailFragment : Fragment() {
         binding = DetailFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         viewModel.selectComic(comicPosition)
+
+        val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState != 1) viewModel.setBottomSheetState(newState)
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        }
+        BottomSheetBehavior.from(binding.bottomSheet).apply {
+            state = BottomSheetBehavior.STATE_DRAGGING
+        }.addBottomSheetCallback(bottomSheetCallback)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        BottomSheetBehavior.from(binding.bottomSheet).apply {
-            this.state = BottomSheetBehavior.STATE_DRAGGING
-        }
-
         binding.btnFindOutMore.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(viewModel.selectedComic.value?.urls?.get(0)?.url)
             })
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        BottomSheetBehavior.from(binding.bottomSheet).apply {
+            when (viewModel.bottomSheetState.value) {
+                2 -> {
+                    state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                }
+                3 -> {
+                    state = BottomSheetBehavior.STATE_EXPANDED
+                }
+                4 -> {
+                    state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+                else -> {
+
+                }
+            }
         }
     }
 }

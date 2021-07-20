@@ -34,8 +34,6 @@ class SearchFragment : Fragment() {
             navigateToDetailFragment(it)
         }
         binding.rvComicSearchView.adapter = adapter
-        viewModel.clearComicList()
-
         binding.svComicSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 chosenTitle = query.toString()
@@ -48,38 +46,20 @@ class SearchFragment : Fragment() {
             }
         })
         overrideBackButton()
+        if (viewModel.navigatedFromHome.value == true) viewModel.clearComicList()
 
         return binding.root
-    }
-
-    private fun overrideBackButton() {
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (backPressCount >= 1) {
-                        requireActivity().finish()
-                    } else {
-                        backPressCount++
-                        Snackbar.make(
-                            requireView(),
-                            resources.getString(R.string.pressAgain),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            })
-    }
-
-    fun navigateToDetailFragment(position: Int) {
-        viewModel.navigatedFrom()
-        this.findNavController()
-            .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(position))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initStateObserver()
+    }
+
+    fun navigateToDetailFragment(position: Int) {
+        viewModel.navigatedFromHome(false)
+        this.findNavController()
+            .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(position))
     }
 
     private fun initStateObserver() {
@@ -114,5 +94,24 @@ class SearchFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun overrideBackButton() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (backPressCount >= 1) {
+                        requireActivity().finish()
+                    } else {
+                        backPressCount++
+                        Snackbar.make(
+                            requireView(),
+                            resources.getString(R.string.pressAgain),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            })
     }
 }

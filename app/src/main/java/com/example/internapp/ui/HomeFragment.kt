@@ -7,7 +7,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.internapp.MainViewModel
 import com.example.internapp.R
 import com.example.internapp.databinding.HomeFragmentBinding
@@ -15,13 +14,13 @@ import com.example.internapp.repository.UIState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: HomeFragmentBinding
     private lateinit var adapter: ComicAdapter
     private var backPressCount: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,7 +34,8 @@ class HomeFragment : Fragment() {
         binding.rvComicHome.adapter = adapter
         refreshHome()
 
-        viewModel.clearComicList()
+        viewModel.navigatedFromHome(true)
+        viewModel.checkBackupComicList()
         setHasOptionsMenu(true)
         overrideBackButton()
         return binding.root

@@ -24,6 +24,7 @@ class ComicAdapter(
                 notifyDataSetChanged()
             }
         })
+        viewModel.setBottomSheetState(2)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {

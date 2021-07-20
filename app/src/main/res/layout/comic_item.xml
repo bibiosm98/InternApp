@@ -15,8 +15,6 @@
             android:id="@+id/comicConstraint"
             android:layout_width="match_parent"
             android:layout_height="174dp"
-            android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingEnd="9dp"
             android:paddingRight="9dp">
 

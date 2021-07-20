@@ -32,7 +32,6 @@ class MainViewModel @Inject constructor(
     private val _navigatedFromHome = MutableLiveData<Boolean>()
     val navigatedFromHome: LiveData<Boolean>
         get() = _navigatedFromHome
-    private val _navigatedFromSearch = MutableLiveData<Boolean>()
 
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>
@@ -48,7 +47,6 @@ class MainViewModel @Inject constructor(
 
     init {
         _navigatedFromHome.value = true
-        _navigatedFromSearch.value = false
         isUserLoggedIn()
     }
 

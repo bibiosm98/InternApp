@@ -34,6 +34,8 @@ class AuthenticationViewModel : ViewModel() {
                 _uiState.value = UIState.OnSuccess
             }.addOnFailureListener {
                 _uiState.value = UIState.OnError
+            }.addOnCompleteListener {
+                _uiState.value = UIState.OnWaiting
             }
     }
 

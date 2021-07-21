@@ -14,6 +14,7 @@ import com.example.internapp.databinding.RegistrationFragmentBinding
 import com.example.internapp.repository.UIState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -37,43 +38,18 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun createUser() {
+        val iv = InputValidator()
         val email = binding.tietLogin.text?.trim().toString()
         val password = binding.tietPassword.text?.trim().toString()
         val passwordRepeat = binding.tietPasswordRepeat.text?.trim().toString()
 
-        if (email.isEmpty()) {
-            Snackbar.make(
-                requireView(),
-                resources.getString(R.string.typeEmail),
-                Snackbar.LENGTH_SHORT
-            ).show()
-            return
-        }
-        if (password.isEmpty()) {
-            Snackbar.make(
-                requireView(),
-                resources.getString(R.string.typePassword),
-                Snackbar.LENGTH_SHORT
-            ).show()
-            return
-        }else{
-            if(password.length<6){
-                Snackbar.make(
-                    requireView(),
-                    resources.getString(R.string.requiredPasswordSize),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                return
-            }
-        }
-        if (password == passwordRepeat) {
-            viewModel.createUser(email, password)
-        } else {
-            Snackbar.make(
-                requireView(),
-                resources.getString(R.string.passwordDifference),
-                Snackbar.LENGTH_SHORT
-            ).show()
+        try {
+            iv.checkEmail(email)
+            iv.checkPassword(password)
+            if (password == passwordRepeat) viewModel.createUser(email, password)
+            else throw Exception("Podane hasła nie są zgodne")
+        } catch (e: Exception) {
+            Snackbar.make(requireView(), e.message.toString(), Snackbar.LENGTH_LONG).show()
         }
     }
 

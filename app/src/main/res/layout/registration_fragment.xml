@@ -39,6 +39,7 @@
                     android:id="@+id/tietLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM+-_~@."
                     android:ems="15"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>

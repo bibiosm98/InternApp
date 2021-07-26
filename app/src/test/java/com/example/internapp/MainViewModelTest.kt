@@ -32,15 +32,6 @@ class MainViewModelTest{
         mainViewModel = MainViewModel(marvelApiRepository)
     }
 
-//    @Test
-//    fun aa(){
-////        val value = mainViewModel.selectedComic.getOrAwaitValue()
-////        assertThat(value.(), (not(nullValue())))
-//
-//        assertThat(0f, `is`(0f))
-////        assertThat(result.completedTasksPercent, `is`(0f))
-//    }
-
     @Test
     fun setUIState_onWaiting_returnsOnWaiting(){
         mainViewModel.setUIState(UIState.OnWaiting)

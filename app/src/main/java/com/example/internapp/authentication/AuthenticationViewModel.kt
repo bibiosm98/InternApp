@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.internapp.repository.FirebaseRepository
 import com.example.internapp.repository.UIState
+import com.google.firebase.auth.FirebaseAuth
 
 class AuthenticationViewModel : ViewModel() {
-    val repository = FirebaseRepository()
+    val repository = FirebaseRepository(FirebaseAuth.getInstance())
 
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>

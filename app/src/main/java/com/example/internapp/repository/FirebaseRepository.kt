@@ -6,10 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
-class FirebaseRepository {
-    private val fbAuth = FirebaseAuth.getInstance()
-
+class FirebaseRepository @Inject constructor(private val fbAuth: FirebaseAuth) {
     fun isUserLoggedIn(): Boolean {
         Firebase.auth.currentUser?.let {
             return true

@@ -5,19 +5,15 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.internapp.repository.*
 import com.google.firebase.FirebaseApp
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.internal.matchers.Null
-import kotlin.reflect.jvm.internal.impl.resolve.constants.NullValue
 
 @RunWith(AndroidJUnit4::class)
 class MainViewModelTest {
@@ -25,7 +21,6 @@ class MainViewModelTest {
     var instantExecutorRule = InstantTaskExecutorRule()
 
     @MockK
-    private lateinit var marvelApiRepository: MarvelApiRepository
     private lateinit var mainViewModel: MainViewModel
     private var comicList = ArrayList<Comic>()
 
@@ -54,11 +49,8 @@ class MainViewModelTest {
         FirebaseApp.initializeApp(ApplicationProvider.getApplicationContext())
 
         val marvelApiRepository = mockk<MarvelApiRepository>()
-        every {
-            runBlocking {
-                delay(3000)
-                marvelApiRepository.getAllData()
-            }
+        coEvery {
+            marvelApiRepository.getAllData()
         } returns comicList
         mainViewModel = MainViewModel(marvelApiRepository)
     }
@@ -174,9 +166,8 @@ class MainViewModelTest {
     @Test
     fun signOutUser_userLoggedOut_returnsOnWaiting() {
         mainViewModel.signOutUser()
-        assertEquals(mainViewModel.uiState.value, UIState.OnWaiting)
         val uiState = mainViewModel.uiState.getOrAwaitValue()
-        assertThat(uiState, `is`(not(nullValue())))
+        assertThat(uiState, `is`(UIState.OnWaiting))
         assertThat(mainViewModel.repository.currentUser(), `is`(nullValue()))
     }
 

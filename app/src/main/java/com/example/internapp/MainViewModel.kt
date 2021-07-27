@@ -94,6 +94,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun clearBackupComicList() {
+        backupComicList = listOf()
+    }
+
     fun isComicListEmpty() {
         if (_comicList.value?.size == 0) {
             _uiState.value = UIState.InProgress

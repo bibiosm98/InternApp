@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.internapp.repository.FirebaseRepository
+import com.example.internapp.repository.MarvelApiRepository
 import com.example.internapp.repository.UIState
 import com.google.firebase.auth.FirebaseAuth
+import javax.inject.Inject
 
-class AuthenticationViewModel : ViewModel() {
-    val repository = FirebaseRepository(FirebaseAuth.getInstance())
+class AuthenticationViewModel @Inject constructor(
+    private val repository: FirebaseRepository
+) : ViewModel() {
 
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState>
